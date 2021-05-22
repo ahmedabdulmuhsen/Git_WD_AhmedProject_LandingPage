@@ -1,0 +1,363 @@
+/* Start Variables */
+:root {
+    --main-color: #F5F5DC;
+}
+/* End Variables */
+
+/* Start Global Rules */
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth; /* IT HAS TO BE COMPATIBLE */
+}
+body {
+    font-family: "Work Sans", sans-serif;
+    
+}
+
+.container {
+    padding-left: 15px; /* For the mobile view for some reason */
+    padding-right: 15px;
+    margin-right: auto; /* They are essential for the container in general */
+    margin-left: auto;
+}
+
+/* Small */
+
+@media (min-width: 768px) { /* Setting the container size to be resposive */
+    .container {
+        width: 750px;
+    }
+}
+
+/* Medium */
+
+@media (min-width: 992px) { /* Setting the container size to be resposive */
+    .container {
+        width: 970px;
+    }
+}
+
+/* Large */
+
+@media (min-width: 1200px) { /* Setting the container size to be resposive */
+    .container {
+        width: 1170px;
+    }
+}
+
+/* End Global Rules */
+
+/* Start Compenents */ /* Non-variable things which we will use too much */
+.special-heading{
+    color: #A97B50;
+    font-size: 100px;
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: -3px;
+    margin: 0; /* Margin 0 is better here than padding 0 */
+    
+}
+
+.special-heading + p { /* + means directly the next p only will be affected*/
+    margin: -30px 0 0; /* Top, Right, Bottom */ /* We did negative so it will be merging with the header */
+    font-size: 20px;
+    text-align: center;
+}
+
+@media (max-width: 767px){ /* manually fixing it, because in the mobile view it is not working properly */
+    .special-heading {
+        font-size: 60px;
+    }
+    .special-heading + p {
+        margin-top: -20px;
+        font-size: 15px;
+    }
+}
+
+/* End Compenents */
+
+/* Start Header */
+.header {
+    padding: 20px; /* So the elements of the header won't get stuck to the top of the screen */
+}
+
+.header .container {
+    display: flex; /* all the elements within the container, will be displayed side by side without negating their widths */
+    justify-content: space-between; /* space the flexed elements to be away from each other in a automatic manner */
+}
+
+.header .page-bars {
+    font-size: 25px;
+    color: #A97B50;
+}
+
+.header .logo {
+    width: 60px; /* Should I change the width and the height at the same time? */
+    height: 24px;    
+}
+
+.header .links {
+    position: relative; /* You can move it top right left bottom relatively from its normal original positon */
+}
+
+.header .links ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: #f6f6f6;
+    position: absolute;
+    right: 0; /* absolute will make the us go outside of the container, with right: 0; that will be fixed */
+    min-width: 200px;
+    top: calc(100% + 15px); /* To stay away from the bars icon, need to study it more */
+    display: none; /* it will hide the list and load the horrible styles before they will be removed by our css*/
+    z-index: 1; /* To give it the maximum priority to be on on top all of the elements when we hover on it */
+                /* But why did we need it suddenly?*/
+}
+
+.header .links ul::before { /* to add to the befores of the ul */
+    content: ""; /* So it can appear in the inspect element tool, and we can add or change it */
+
+    /* The small arrow for the content ul coming from the bars icon */ /* Use inspect element to figure out the best positioning for the arrow from your screen */
+    border-width: 10px;                                                /* Don't worry, it will be responsive on others screen? */
+    border-style: solid;
+    border-color: transparent transparent #f6f6f6 transparent;
+    position: absolute;
+    right: 0px;
+    top: -20px;
+
+}
+
+.header .links:hover ul { /* putting :hover after ::before is logical :)*/
+    display: block;
+}
+
+.header .links ul li a {
+    display: block; /* See why here */
+    padding: 15px;
+    text-decoration: none; /* To remove the horrible styling for href */
+    color: #333;
+    transition: 0.3s; /* So any change to the element can appear slowly or fast depending on the time given */
+                      /* Mostly it is for when we hover on the elements to make them smooth */
+}
+
+.header .links ul li a:hover {
+    padding-left: 25px; /* To move it slowly to the right */
+}
+
+.header .links ul li:not(:last-child) a {
+    border-bottom: 1px solid #ddd;
+}
+/* End Header */
+
+/* Start Landing Section */
+.landing {
+    background-image: url("../images/landing2.png");
+    background-size: cover; /* it will take the whole width and height of the div */
+    height: calc(100vh - 64px); /* 64px is the current hight of the header */
+                                /* Viewport Height (vh). This unit is based on the height of the viewport. A value of 1vh is equal to 1% of the viewport height.  */
+                                /* The viewport is the user's visible area of a web page. The viewport varies with the device, and will be smaller on a mobile phone than on a computer screen */
+    position: relative; /* mostly it is used to link it with an absoulte position from a child div */
+}
+
+.landing .intro-text {
+    position: absolute; /* These commands will center the div without the landing section */
+    left: 50%;          /* Just me sure to position relative the landing section*/
+    top: 50%;
+    transform: translate(-50%, -50%); /* need to understand how this workedXXXXXXXXXXXXXXXX */
+    /* An element with position: absolute; is positioned relative to the nearest positioned ancestor (instead of positioned relative to the viewport, like fixed).
+    However; if an absolute positioned element has no positioned ancestors, it uses the document body, and moves along with page scrolling.*/
+    text-align: center;
+}
+.landing .intro-text h1 {
+    margin: 0; /* To solve the scroll problem when we use height: calc(100vh - 64px); */
+    font-weight: bold;
+    font-size: 50px;
+    color: var(--main-color);
+    max-width: 100%; /* This will not make it go outside of its div */
+}
+.landing .intro-text p {
+    font-size: 19px;
+    line-height: 1.8;
+    color: white;
+}
+/* End Landing Section */
+
+/* Start Features */
+.features {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: #F5F5DC;
+}
+
+.features .container {
+    display: grid; /* the layout of grid so we can make multiple columns and rows */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* to put elements beside each other by taking 300px minumum, and even if there is a fraction */
+}                                                                 /* need to understand it moreXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+.features .feat {
+    padding: 20px; /* Always a good idea to do that when we have a elements within the grid */
+    text-align: center;
+}
+
+.features .feat h3 {
+    font-weight: 800;
+    margin: 30px 0; /* Why it is better to use margins for children not parents? */
+}
+
+.features .feat p {
+    line-height: 1.6;
+    font-size: 17px; /* do manual adjusting always to see what works better using the inspect tool */
+}
+/* End Features */
+
+/* Start Services */
+.services {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+/* Ending Services */
+
+/* Start Portfolio */
+.portfolio {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+.portfolio .portfolio-content {
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 30px; /* The same as we have done from before, just with a grid-gap */
+    margin-top: 80px;
+    
+}
+
+.portfolio .portfolio-content .card img {
+    max-width: 100%;
+}
+
+.portfolio .portfolio-content .card .info {
+    padding: 20px;
+}
+
+.portfolio .portfolio-content .card .info h3{
+    margin: 0; /* So the padding can control, not the margin */
+} 
+
+.portfolio .portfolio-content .card .info p {
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+/* End Portfolio */
+
+/* Start About */
+.about {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+.about .about-content {
+    margin-top: 100px;
+    display: flex;
+    flex-wrap: wrap; /* To prevent any content going out its div */
+    justify-content: space-between;
+}
+
+@media (max-width: 991px) { /* Take the pixel from the inspect element */
+    .about .about-content {
+        flex-direction: column; /* So when the screen is small, the image and the text divs will stach on top of each other separately */
+        text-align: center;
+    }
+}
+
+@media (max-width: 991px) {
+    .about .about-content .image {
+        margin: 0 auto 60px; /* Top Bottom Right-Left */
+}
+}
+.about .about-content .image {
+    width: 309px;
+    height: 375px;
+}
+
+.about .about-content .image img {
+    max-width: 100%;
+}
+
+.about .about-content .text {
+    flex-basis: calc(100% - 500px); /* An interesting way to do it, need to study it more */
+                                    /*500px to sperate them in the flex between?*/
+}
+
+.about .about-content .text p:first-of-type { /* (first-of-type) first <p> will only change */
+    font-weight: bold;
+    line-height: 2;
+    margin-bottom: 60px; /* Why we are using the margin here, not the padding */
+}
+
+.about .about-content .text hr {
+    width: 50%;
+    display: inline-block; /* So it can start from the left */
+}
+
+.about .about-content .text p:last-of-type {
+    line-height: 2;
+}
+/* End About */
+
+/* Start Contact */
+.contact {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.contact .info {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    text-align: center;
+}
+
+.contact .info .label {
+    font-size: 35px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    margin-bottom: 15px;;
+}
+.contact .info .link {
+    display: block; /* it is better, because by default it is not */
+    font-size: 35px;
+    font-weight: 800;
+    color: #A97B50;
+    text-decoration: none;
+}
+.contact .info .social {
+    display: flex;
+    justify-content: center; /* to center elements not just plain texts */
+    margin-top: 20px;
+    font-size: 16px;
+}
+.contact .info .social i {
+    margin-left: 10px;
+}
+
+@media (max-width: 767px) {
+    .contact .info .label,
+    .contact .info .link {
+        font-size: 19px;
+    }
+}
+/* End Contact */
+
+/* Start Footer */
+.footer {
+    background-color: #F5F5DC;
+    padding: 30px 10px; /* Top-Bottom Right-Left */
+    text-align: center;
+    font-size: 18px;
+}
+.footer span {
+    font-weight: bold;
+    color: #A97B50;
+}
+/* End Footer */
